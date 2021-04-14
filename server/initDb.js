@@ -3,7 +3,7 @@ const faker = require('faker');
 const compTypes = ['LP', 'LLP', 'LLC', 'PLLC', 'Corp.', 'Inc.'];
 const cities = new Set();
 for (let i = 0; i < 1000; i++) {
-    cities.add(faker.address.city());
+    cities.add(`${faker.address.city()}, ${faker.address.stateAbbr()}`);
 }
 const cityCnt = cities.size;
 const partners = [];
@@ -46,7 +46,7 @@ module.exports = (db) => {
         )`);
 
         db.run(`INSERT INTO company_type (name) VALUES ${compTypes.map(() => '(?)').join(',')}`, compTypes);
-        db.run(`INSERT INTO city (name) VALUES ${[ ...cities ].map(() => '(?)').join(',')}`, cities);
+        db.run(`INSERT INTO city (name) VALUES ${[ ...cities ].map(() => '(?)').join(',')}`, [ ...cities ]);
         const stmt = db.prepare(`INSERT INTO partner (${partnerCols.join(',')}) VALUES (${partnerCols.map(_ => '?').join(',')})`);
         partners.forEach(i => {
             stmt.run(Object.values(i));
