@@ -21,21 +21,11 @@ const db = new sqlite3.Database(dbFile);
     }
 })();
 
-const query = query => new Promise(async (resolve, reject) => {
-    db.all(query, (err, rows) => err && reject(err) || resolve(rows));
+const query = (query, params = []) => new Promise(async (resolve, reject) => {
+    db.all(query, params, (err, rows) => err && reject(err) || resolve(rows));
 });
-
-const getRows = queryStr => async (req, resp) => {
-    try {
-        const result = await query(queryStr);
-        resp.code(200).header('Content-Type', 'application/json; charset=utf-8').send(result);
-    } catch (e) {
-        resp.code(500).send('Bad query');
-    }
-}
 
 module.exports = {
     db,
     query,
-    getRows,
 };

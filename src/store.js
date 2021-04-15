@@ -14,6 +14,11 @@ const reducer = function(state = initState, action) {
             return { ...state, cities: action.cities };
         case 'SET_COMPANY_TYPES':
             return { ...state, companyTypes: action.companyTypes };
+        case 'DELETE_PARTNER':
+            const partners = [ ...state.partners ];
+            const index = partners.findIndex(i => i.id === action.id);
+            partners.splice(index, 1);
+            return { ...state, partners };
         default:
 //
 //    case types.GET_USERS_SUCCESS:

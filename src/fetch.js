@@ -1,6 +1,6 @@
-const get = path => new Promise(async (resolve, reject) => {
+const request = (path, method = 'GET') => new Promise(async (resolve, reject) => {
     try {
-        const resp = await fetch(process.env.REACT_APP_SERVER_URL + path);
+        const resp = await fetch(process.env.REACT_APP_SERVER_URL + path, { method });
         if (resp.ok) {
             const data = await resp.json();
             resolve(data);
@@ -12,6 +12,10 @@ const get = path => new Promise(async (resolve, reject) => {
     }
 });
 
+const get = path => request(path);
+const remove = path => request(path, 'DELETE');
+
 export {
     get,
-}
+    remove,
+};
