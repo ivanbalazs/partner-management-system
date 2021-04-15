@@ -10,7 +10,9 @@ if (process.argv[2] && !fs.existsSync(process.argv[2])) {
 }
 const dbFile = process.argv[2] || path.join(__dirname, '..', 'db.sqlite');
 console.log(`Using DB file ${dbFile}}`);
-fs.unlinkSync(dbFile);
+if (!process.argv[2] && fs.existsSync(dbFile)) {
+    fs.unlinkSync(dbFile);
+}
 
 const db = new sqlite3.Database(dbFile);
 
