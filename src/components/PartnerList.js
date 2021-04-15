@@ -1,4 +1,7 @@
 import React from 'react';
+import Button from 'react-bootstrap/Button';
+import Spinner from 'react-bootstrap/Spinner';
+import Table from 'react-bootstrap/Table';
 import { connect } from 'react-redux';
 import store from '../store';
 import { get } from '../fetch';
@@ -36,12 +39,15 @@ class PartnerList extends React.Component {
     render() {
         if (!this.props.partners || !this.props.cities || !this.props.companyTypes) {
             return (
-                <h1>Fetching partner list...</h1>
+                <div style={{ fontSize: '1.3em' }}>
+                    <Spinner animation="border" />
+                    <span style={{ paddingLeft: '16px' }}>Fetching partner list...</span>
+                </div>
             )
         }
         const compTypes = this.props.companyTypes.reduce((ret, curr) => ({ ...ret, [curr.id]: curr.name }), {});
         return (
-            <table>
+            <Table striped bordered hover>
                 <thead>
                     <tr>
                         <th>Name</th>
@@ -66,7 +72,7 @@ class PartnerList extends React.Component {
                         </tr>
                     )}
                 </tbody>
-            </table>
+            </Table>
         )
     }
 }
