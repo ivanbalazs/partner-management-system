@@ -7,13 +7,6 @@ import store from '../store';
 import { get } from '../fetch';
 
 class PartnerList extends React.Component {
-//    constructor(props) {
-//        super(props);
-//        this.state = {
-//            list: null,
-//        }
-//    }
-
     async componentDidMount() {
         try {
             get('city').then(cities => store.dispatch({ type: 'SET_CITIES', cities }));
@@ -23,12 +16,6 @@ class PartnerList extends React.Component {
         } catch (e) {
             alert('Could not fetch list of partners. Please try again!');
         }
-//        const resp = await fetch(process.env.REACT_APP_SERVER_URL + 'partner');
-//        if (resp.ok) {
-//            const list = await resp.json();
-////            this.setState({ list:  });
-//        } else {
-//        }
     }
 
     getCity(id) {
@@ -77,13 +64,4 @@ class PartnerList extends React.Component {
     }
 }
 
-
-const mapStateToProps = function(state) {
-    return { ...state };
-//        partners: state.partners,
-//        cities: state.cities,
-//        companyTypes: state.companyTypes,
-//    };
-};
-
-export default connect(mapStateToProps)(PartnerList);
+export default connect(state => ({ ...state}))(PartnerList);
