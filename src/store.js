@@ -20,19 +20,6 @@ const reducer = function(state = initState, action) {
             partners.splice(index, 1);
             return { ...state, partners };
         default:
-//
-//    case types.GET_USERS_SUCCESS:
-//      return Object.assign({}, state, { users: action.users });
-//
-//    case types.DELETE_USER_SUCCESS:
-//
-//      // Use lodash to create a new user array without the user we want to remove
-//      const newUsers = _.filter(state.users, user => user.id != action.userId);
-//      return Object.assign({}, state, { users: newUsers });
-//
-//    case types.USER_PROFILE_SUCCESS:
-//      return Object.assign({}, state, { userProfile: action.userProfile });
-
     }
 
     return state;

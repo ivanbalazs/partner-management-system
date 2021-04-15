@@ -40,7 +40,6 @@ class PartnerList extends React.Component {
             store.dispatch({ type: 'DELETE_PARTNER', id });
             this.setState({ message: 'Partner successfully deleted.' });
         } catch (e) {
-            console.error(e);
             alert('Could not delete partner!');
         }
     }
